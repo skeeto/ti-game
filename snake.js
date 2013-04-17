@@ -1,9 +1,13 @@
 function Snake(display) {
     Game.call(this, display);
+    this.map = new Map().draw(this.display);
     this.framerate = 10;
-    this.parts = [Point.random()];
+    do {
+        var start = Point.random();
+    } while (this.map.isSolid(start));
+    this.parts = [start];
     this.dir = Snake.dirs[rand(Snake.dirs.length)];
-    this.map = {};
+    this.length = 3;
 }
 
 Snake.prototype = Object.create(Game.prototype);
@@ -14,12 +18,14 @@ Snake.dirs = [Point(-1, 0), Point(0, -1), Point(1, 0), Point(0, 1)];
 Snake.prototype.step = function() {
     this.count++;
     this.parts.unshift(this.parts[0].add(this.dir));
-    this.display.set(this.parts.pop(), 0);
+    if (this.parts.length > this.length) {
+        this.display.set(this.parts.pop(), 0);
+    }
     this.parts.forEach(function(part) {
         this.display.set(part, 3);
     });
-};
-
-Snake.prototype.inBounds = function(point) {
-    return this.map(point);
+    if (this.map.isSolid(this.parts[0])) {
+        this.display.set(this.parts[0], 1);
+        this.stop();
+    }
 };
