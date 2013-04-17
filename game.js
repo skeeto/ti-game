@@ -2,6 +2,7 @@ function Game(display) {
     this.display = display;
     this.count = 0;
     this.framerate = 30;
+    this.id = null;
 }
 
 Game.prototype.step = function() {
@@ -17,5 +18,14 @@ Game.prototype.runner = function() {
 };
 
 Game.prototype.run = function() {
-    setInterval(this.runner(), 1000 / this.framerate);
+    if (this.id == null) {
+        this.id = setInterval(this.runner(), 1000 / this.framerate);
+    }
+};
+
+Game.prototype.stop = function() {
+    if (this.id != null) {
+        clearInterval(this.id);
+        this.id = null;
+    }
 };
