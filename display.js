@@ -9,7 +9,7 @@ function Display(context) {
 Display.WIDTH = 96;
 Display.HEIGHT = 64;
 Display.DEPTH = 4;
-Display.COLORS = ['white', 'lightgray', ' gray' ,'black'];
+Display.COLORS = ['#fff', '#d3d3d3', ' #808080' ,'#000'];
 
 Display.prototype.clear = function() {
     this.context.fillStyle = Display.COLORS[0];
