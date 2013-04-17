@@ -29,3 +29,16 @@ Game.prototype.stop = function() {
         this.id = null;
     }
 };
+
+Game.prototype.left = function() {
+    console.log('input: left');
+};
+Game.prototype.up = function() {
+    console.log('input: up');
+};
+Game.prototype.right = function() {
+    console.log('input: right');
+};
+Game.prototype.down = function() {
+    console.log('input: down');
+};
