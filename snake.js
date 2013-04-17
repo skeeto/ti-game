@@ -7,6 +7,7 @@ function Snake(display) {
     } while (this.map.isSolid(start));
     this.parts = [start];
     this.dir = Snake.dirs[rand(Snake.dirs.length)];
+    this.nextdir = this.dir;
     this.length = 3;
 }
 
@@ -42,6 +43,8 @@ Snake.prototype.step = function() {
     }
 
     // Check collisions
+    this.dir = this.nextdir;
+    this.nextdir = this.dir;
     var head = this.parts[0].add(this.dir);
     if (this.map.isSolid(head) || this.isSnake(head)) {
         this.gameOver();
@@ -60,19 +63,19 @@ Snake.prototype.step = function() {
 };
 
 Snake.prototype.left = function() {
-    if (this.dir != Snake.RIGHT) this.dir = Snake.LEFT;
+    if (this.dir !== Snake.RIGHT) this.nextdir = Snake.LEFT;
 };
 
 Snake.prototype.right = function() {
-    if (this.dir != Snake.LEFT) this.dir = Snake.RIGHT;
+    if (this.dir !== Snake.LEFT) this.nextdir = Snake.RIGHT;
 };
 
 Snake.prototype.up = function() {
-    if (this.dir != Snake.DOWN) this.dir = Snake.UP;
+    if (this.dir !== Snake.DOWN) this.nextdir = Snake.UP;
 };
 
 Snake.prototype.down = function() {
-    if (this.dir != Snake.UP) this.dir = Snake.DOWN;
+    if (this.dir !== Snake.UP) this.nextdir = Snake.DOWN;
 };
 
 Snake.prototype.gameOver = function() {
