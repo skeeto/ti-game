@@ -25,7 +25,7 @@ Display.prototype.set = function(point, color) {
 Display.prototype.random = function() {
     for (var y = 0; y < Display.HEIGHT; y++) {
         for (var x = 0; x < Display.WIDTH; x++) {
-            this.set(x, y, ~~(Math.random() * Display.DEPTH));
+            this.set(Point(x, y), rand(Display.DEPTH));
         }
     }
 };
