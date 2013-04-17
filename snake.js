@@ -13,7 +13,11 @@ function Snake(display) {
 Snake.prototype = Object.create(Game.prototype);
 Snake.prototype.constructor = Snake;
 
-Snake.dirs = [Point(-1, 0), Point(0, -1), Point(1, 0), Point(0, 1)];
+Snake.LEFT = Point(-1, 0);
+Snake.RIGHT = Point(1, 0);
+Snake.UP = Point(0, -1);
+Snake.DOWN = Point(0, 1);
+Snake.dirs = [Snake.LEFT, Snake.RIGHT, Snake.UP, Snake.DOWN];
 
 Snake.prototype.step = function() {
     this.count++;
@@ -28,4 +32,20 @@ Snake.prototype.step = function() {
         this.display.set(this.parts[0], 1);
         this.stop();
     }
+};
+
+Snake.prototype.left = function() {
+    if (this.dir != Snake.RIGHT) this.dir = Snake.LEFT;
+};
+
+Snake.prototype.right = function() {
+    if (this.dir != Snake.LEFT) this.dir = Snake.RIGHT;
+};
+
+Snake.prototype.up = function() {
+    if (this.dir != Snake.DOWN) this.dir = Snake.UP;
+};
+
+Snake.prototype.down = function() {
+    if (this.dir != Snake.UP) this.dir = Snake.DOWN;
 };
