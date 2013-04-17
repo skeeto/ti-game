@@ -1,11 +1,15 @@
 function Point(x, y) {
     if (!(this instanceof Point)) {
         return new Point(x, y);
+    } else if (typeof x === 'string') {
+        var p = (null, /(\d+) (\d+)/.exec(x).slice(1).map(parseFloat));
+        this.x = p[0];
+        this.y = p[1];
     } else {
         this.x = x;
         this.y = y;
-        return this;
     }
+    return this;
 }
 
 Point.random = function() {
