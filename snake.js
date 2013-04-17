@@ -19,19 +19,44 @@ Snake.UP = Point(0, -1);
 Snake.DOWN = Point(0, 1);
 Snake.dirs = [Snake.LEFT, Snake.RIGHT, Snake.UP, Snake.DOWN];
 
+Snake.prototype.addFood = function(point) {
+    if (!this.map.isSolid(point)) {
+        this.map.set(point, Map.FOOD);
+        this.map.draw(this.display);
+    }
+};
+
+Snake.prototype.isSnake = function(point) {
+    for (var i = 0; i < this.parts.length; i++) {
+        if (point.equals(this.parts[i])) {
+            return true;
+        }
+    }
+    return false;
+};
+
 Snake.prototype.step = function() {
     this.count++;
-    this.parts.unshift(this.parts[0].add(this.dir));
+    if (this.count < 10 || rand(20) === 0) {
+        this.addFood(Point.random());
+    }
+
+    // Check collisions
+    var head = this.parts[0].add(this.dir);
+    if (this.map.isSolid(head) || this.isSnake(head)) {
+        this.gameOver();
+    } else if (this.map.isFood(head)) {
+        this.length++;
+    }
+
+    // Update
+    this.parts.unshift(head);
     if (this.parts.length > this.length) {
         this.display.set(this.parts.pop(), 0);
     }
     this.parts.forEach(function(part) {
         this.display.set(part, 3);
     });
-    if (this.map.isSolid(this.parts[0])) {
-        this.display.set(this.parts[0], 1);
-        this.stop();
-    }
 };
 
 Snake.prototype.left = function() {
@@ -48,4 +73,8 @@ Snake.prototype.up = function() {
 
 Snake.prototype.down = function() {
     if (this.dir != Snake.UP) this.dir = Snake.DOWN;
+};
+
+Snake.prototype.gameOver = function() {
+    this.stop();
 };

@@ -12,11 +12,16 @@ function Map() {
     }
 }
 
-Map.WALL = 2;
 Map.OPEN = 0;
+Map.FOOD = 1;
+Map.WALL = 2;
 
 Map.prototype.isSolid = function(point) {
     return this.data[point] === Map.WALL;
+};
+
+Map.prototype.isFood = function(point) {
+    return this.data[point] === Map.FOOD;
 };
 
 Map.prototype.draw = function(display) {
@@ -25,4 +30,8 @@ Map.prototype.draw = function(display) {
         display.set(Point(key), _this.data[key]);
     });
     return this;
+};
+
+Map.prototype.set = function(point, value) {
+    this.data[point] = value;
 };

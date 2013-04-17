@@ -23,3 +23,7 @@ Point.prototype.add = function(point) {
 Point.prototype.toString = function() {
     return '[Point ' + this.x + ' ' + this.y + ']';
 };
+
+Point.prototype.equals = function(point) {
+    return point.x === this.x && point.y === this.y;
+};
