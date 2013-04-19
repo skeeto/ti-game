@@ -6,13 +6,25 @@ function Controls() {
     });
 }
 
+Controls.prototype.add = function(listener) {
+    this.listeners.push(listener);
+};
+
+Controls.prototype.remove = function(toRemove) {
+    this.listeners = this.listeners.filter(function(listener) {
+        return toRemove !== listener;
+    });
+};
+
 Controls.prototype.call = function(method) {
+    var args = Array.prototype.slice.call(arguments, 1);
     this.listeners.map(function(listener) {
-        listener[method]();
+        listener[method].apply(listener, args);
     });
 };
 
 Controls.prototype.handle = function(code) {
+    this.call('press', code);
     switch(code) {
     case 37:
         this.call('left');

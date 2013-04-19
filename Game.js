@@ -37,6 +37,9 @@ Game.prototype.stop = function() {
     }
 };
 
+Game.prototype.press = function(code) {
+    console.log('press: ' + code);
+};
 Game.prototype.left = function() {
     console.log('input: left');
 };
