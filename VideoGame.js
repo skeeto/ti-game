@@ -2,7 +2,7 @@ function VideoGame(display, url) {
     Game.call(this, display);
     this.video = document.createElement('video');
     this.video.src = url;
-    this.video.loop = true;
+    this.video.setAttribute('loop', true);
     this.background = document.createElement('canvas').getContext('2d');
     this.background.canvas.width = Display.WIDTH;
     this.background.canvas.height = Display.HEIGHT;
