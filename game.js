@@ -20,6 +20,9 @@ Game.prototype.runner = function() {
 Game.prototype.run = function() {
     if (this.id == null) {
         this.id = setInterval(this.runner(), 1000 / this.framerate);
+        return true;
+    } else {
+        return false;
     }
 };
 
@@ -27,6 +30,9 @@ Game.prototype.stop = function() {
     if (this.id != null) {
         clearInterval(this.id);
         this.id = null;
+        return true;
+    } else {
+        return false;
     }
 };
 
