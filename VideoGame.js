@@ -1,5 +1,6 @@
 function VideoGame(display, url) {
     Game.call(this, display);
+    this.transparent = false;
     this.video = document.createElement('video');
     this.video.src = url;
     this.video.setAttribute('loop', true);
@@ -22,6 +23,9 @@ VideoGame.prototype.step = function() {
             b = data[i+2];
         var brightness = (3 * r + 4 * g + b) >>> 3;
         var point = Point((i / 4) % width, ~~((i / 4) / width));
-        this.display.set(point, ~~((brightness / 255) * 4));
+        var color = ~~((brightness / 255) * 4);
+        if (color > 0 || !this.transparent) {
+            this.display.set(point, color);
+        }
     }
 };
