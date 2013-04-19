@@ -1,5 +1,6 @@
-function Snake(display) {
+function Snake(display, title) {
     Game.call(this, display);
+    this.title = title;
     this.map = new Map().draw(this.display);
     this.framerate = 10;
     do {
@@ -81,4 +82,11 @@ Snake.prototype.down = function() {
 
 Snake.prototype.gameOver = function() {
     this.stop();
+    var gameover = new ImageGame(this.display, 'GameOver.png');
+    gameover.run();
+    var title = this.title;
+    gameover.press = function() {
+        gameover.stop();
+        title.run();
+    };
 };

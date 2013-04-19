@@ -40,3 +40,12 @@ Controls.prototype.handle = function(code) {
         break;
     }
 };
+
+Controls._instance = null;
+
+Controls.get = function() {
+    if (this._instance == null) {
+        this._instance = new Controls();
+    }
+    return this._instance;
+};

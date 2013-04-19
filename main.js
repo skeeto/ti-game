@@ -4,14 +4,13 @@ window.addEventListener('load', function() {
     var video = new VideoGame(display, 'opencl.webm');
     var image = new ImageGame(display, 'Snake.png');
     var title = new ComposeGame(video, image);
-    var controls = new Controls(title);
-    title.run();
     title.press = function() {
-        title.stop();
-        controls.remove(title);
-        display.clear();
-        var snake = new Snake(display);
-        controls.add(snake);
-        snake.run();
+        if (this.isRunning()) {
+            this.stop();
+            display.clear();
+            var snake = new Snake(display, this);
+            snake.run();
+        }
     };
+    title.run();
 });

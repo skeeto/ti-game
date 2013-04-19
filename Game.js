@@ -17,8 +17,13 @@ Game.prototype.runner = function() {
     };
 };
 
+Game.prototype.isRunning = function() {
+    return this.id != null;
+};
+
 Game.prototype.run = function() {
-    if (this.id == null) {
+    if (!this.isRunning()) {
+        Controls.get().add(this);
         setTimeout(this.runner(), 0);
         this.id = setInterval(this.runner(), 1000 / this.framerate);
         return true;
@@ -28,7 +33,8 @@ Game.prototype.run = function() {
 };
 
 Game.prototype.stop = function() {
-    if (this.id != null) {
+    if (this.isRunning()) {
+        Controls.get().remove(this);
         clearInterval(this.id);
         this.id = null;
         return true;
