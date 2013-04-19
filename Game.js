@@ -19,6 +19,7 @@ Game.prototype.runner = function() {
 
 Game.prototype.run = function() {
     if (this.id == null) {
+        setTimeout(this.runner(), 0);
         this.id = setInterval(this.runner(), 1000 / this.framerate);
         return true;
     } else {
