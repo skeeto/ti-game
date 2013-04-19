@@ -3,6 +3,7 @@ function VideoGame(display, url) {
     this.video = document.createElement('video');
     this.video.src = url;
     this.video.setAttribute('loop', true);
+    this.video.play();
     this.background = document.createElement('canvas').getContext('2d');
     this.background.canvas.width = Display.WIDTH;
     this.background.canvas.height = Display.HEIGHT;
@@ -10,19 +11,6 @@ function VideoGame(display, url) {
 
 VideoGame.prototype = Object.create(Game.prototype);
 VideoGame.prototype.constructor = VideoGame;
-
-VideoGame.prototype.run = function() {
-    if (Game.prototype.run.call(this)) {
-        this.video.play();
-        console.log('play');
-    }
-};
-
-VideoGame.prototype.stop = function() {
-    if (Game.prototype.stop.call(this)) {
-        this.video.stop();
-    }
-};
 
 VideoGame.prototype.step = function() {
     var width = Display.WIDTH, height = Display.HEIGHT;

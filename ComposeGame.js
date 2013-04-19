@@ -6,18 +6,6 @@ function ComposeGame() {
 ComposeGame.prototype = Object.create(Game.prototype);
 ComposeGame.prototype.constructor = ComposeGame;
 
-ComposeGame.prototype.run = function() {
-    this.games.forEach(function(game) {
-        game.run();
-    });
-};
-
-ComposeGame.prototype.stop = function() {
-    this.games.forEach(function(game) {
-        game.stop();
-    });
-};
-
 ComposeGame.prototype.step = function() {
     this.games.forEach(function(game) {
         game.step();
