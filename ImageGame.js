@@ -2,6 +2,7 @@ function ImageGame(display, url) {
     Game.call(this, display);
     this.framerate = 10;
     this.invert = true;
+    this.transparent = true;
     this.data = null;
 
     var img = new Image();
@@ -29,8 +30,11 @@ ImageGame.prototype.step = function() {
                 b = data[i+2];
             var brightness = (3 * r + 4 * g + b) >>> 3;
             if (this.invert) brightness = 255 - brightness;
-            var point = Point((i / 4) % width, ~~((i / 4) / width));
-            this.display.set(point, ~~((brightness / 255) * 4));
+            var color = ~~((brightness / 255) * 4);
+            if (color > 0 || !this.transparent) {
+                var point = Point((i / 4) % width, ~~((i / 4) / width));
+                this.display.set(point, color);
+            }
         }
     }
 };
