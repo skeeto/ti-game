@@ -54,11 +54,12 @@ Snake.prototype.step = function() {
 
     // Update
     this.parts.unshift(head);
+    var display = this.display;
     if (this.parts.length > this.length) {
-        this.display.set(this.parts.pop(), 0);
+        display.set(this.parts.pop(), 0);
     }
     this.parts.forEach(function(part) {
-        this.display.set(part, 3);
+        display.set(part, 3);
     });
 };
 
