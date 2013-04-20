@@ -1,3 +1,12 @@
+Play it here: http://skeeto.github.com/ti-game/
+
+Known to work in both Firefox and Chrome. Requires HTML5 WebM video support.
+
+The two title screens (randomly selected) are animated:
+
+![](http://i.imgur.com/1sK8kB9.png)
+![](http://i.imgur.com/jtuhLqF.png)
+
 Source: [Week-Long Challenge #1: Make a (tiny) video game!](http://redd.it/1ch463)
 
 * * *
